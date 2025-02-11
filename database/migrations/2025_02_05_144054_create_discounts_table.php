@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('book_id')->constrained('books')->cascadeOnDelete();
+            $table->enum('discount_type', ['percentage', 'fixed']);
+            $table->decimal('discount_value', 8, 2);
+            $table->dateTime('start_date');
+            $table->dateTime('end_date')->nullable();
             $table->timestamps();
         });
     }
